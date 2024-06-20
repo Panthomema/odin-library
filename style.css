@@ -76,7 +76,7 @@
   --color-completed: #888;
   --color-pending: #FFB74D;
 
-  --shadow: 0 0 10px #0000001a;
+  --shadow: 0 0 10px #0000002a;
 }
 
 h1 {
@@ -165,6 +165,10 @@ main {
   background-color: var(--color-white);
   border-radius: 0.5rem;
   box-shadow: var(--shadow);
+}
+
+.book-title {
+  font-style: italic;
 }
 
 .card-control {
