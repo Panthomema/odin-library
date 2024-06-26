@@ -1,5 +1,5 @@
 function Library() {
-  this.books = [];
+  this.books = JSON.parse(localStorage.getItem('books')) ?? [];
 }
 
 Library.prototype.get = function (index) {
@@ -19,6 +19,10 @@ Library.prototype.sort = function () {
     if (a.isRead === b.isRead) return 0;
     return (a.isRead) ? 1 : -1;
   });
+}
+
+Library.prototype.save = function () {
+  localStorage.setItem('books', JSON.stringify(this.books));
 }
 
 export default Library;

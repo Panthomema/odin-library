@@ -4,7 +4,7 @@ function Book({ title, author, publishYear, genre, numPages, isRead }) {
   this.publishYear = publishYear;
   this.genre = genre;
   this.numPages = numPages;
-  this.isRead = isRead;
+  this.isRead = isRead ?? false;
 }
 
 Book.prototype.toggleReadState = function () {

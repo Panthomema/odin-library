@@ -142,19 +142,19 @@ nav {
   gap: 1rem;
 }
 
-#library-add svg {
+.library-add svg {
   fill: var(--color-action);
 }
 
-#library-add:hover svg {
+.library-add:hover svg {
   fill: var(--color-action-hover);
 }
 
-#library-save svg {
+.library-save svg {
   fill: var(--color-positive);
 }
 
-#library-save:hover svg {
+.library-save:hover svg {
   fill: var(--color-positive-hover)
 }
 
@@ -164,6 +164,16 @@ main {
   gap: 3rem;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   align-items: start;
+  transition: opacity 0.5s ease;
+}
+
+#default-content {
+  align-self: center;
+  grid-column: 1/4;
+  display: grid;
+  justify-items: center;
+  font-size: 1.25rem;
+  gap: 1em;
 }
 
 .book-card {
@@ -225,21 +235,20 @@ dialog {
   padding: 2em;
   border-radius: 0.4em;
   box-shadow: var(--shadow);
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.8s ease;
 }
 
-dialog.active {
-  opacity: 1;
+.invisible {
+  opacity: 0;
+}
+
+dialog.invisible::backdrop {
+  background-color: rgba(0, 0, 0, 0); 
 }
 
 dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0); 
-  transition: background-color 0.5s ease;
-}
-
-dialog.active::backdrop {
   background-color: var(--color-overlay);
+  transition: background-color 0.5s ease;
 }
 
 form {

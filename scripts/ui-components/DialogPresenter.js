@@ -18,9 +18,9 @@ function DialogPresenter (selector) {
 
 DialogPresenter.prototype.show = function() {
   this.htmlElement.showModal();
-  
+
   requestAnimationFrame(() => {
-    this.htmlElement.classList.add('active');
+    this.htmlElement.classList.remove('invisible');
     this.htmlElement.addEventListener('transitionend', () => {
       document.addEventListener('click', this.clickOutsideHandler);
     }, { once: true });
@@ -30,7 +30,7 @@ DialogPresenter.prototype.show = function() {
 DialogPresenter.prototype.hide = function () {
   document.removeEventListener('click', this.clickOutsideHandler);
 
-  this.htmlElement.classList.remove('active');
+  this.htmlElement.classList.add('invisible');
   this.htmlElement.addEventListener('transitionend', event => {
     event.currentTarget.close();
   }, { once: true });
