@@ -28,6 +28,42 @@
     </header>
     <main>
     </main>
+    <dialog>
+      <form method="dialog" action="#">
+        <h2>newBook.</h2>
+        <label for="title">
+          <input type="text" name="title" id="title" placeholder="title" maxlength="100" required>
+        </label>
+        <label for="author">
+          <input type="text" name="author" id="author" placeholder="author" maxlength="40">
+        </label>
+        <label for="publishYear">
+          <input type="number" name="publishYear" id="publishYear" placeholder="publishYear" min="-2100" max="9999">
+        </label>
+        <label for="genre">
+          <input type="text" name="genre" id="genre" placeholder="genre" max="40">
+        </label>
+        <label for="numPages">
+          <input type="number" name="numPages" id="numPages" placeholder="numPages" min="1" max="999999">
+        </label>
+        <div class="card-control">
+          <label for="isRead">
+            <input type="checkbox" name="isRead" id="isRead" value="true">
+            <button class="book-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                <path d="M270-80q-45 0-77.5-29.92Q160-139.85 160-184v-562q0-37.04 22.58-66.29 22.58-29.24 59.09-37.04l385-78.67v626.67l-366.34 76.66q-14.43 3.13-24.04 14.86-9.62 11.73-9.62 25.81 0 16.33 13 26.83t30.33 10.5h463.33V-800H800v720H270Zm76.67-229.67L560-354v-492l-213.33 43v493.33ZM280-295.79V-789l-18.33 3.67q-15 3.33-25 13.71-10 10.39-10 25.62v466.33q7.7-4.13 16.18-7.23 8.48-3.1 17.48-4.77l19.67-4.12ZM226.67-781v501.33V-781Z"></path>
+              </svg>
+            </button>
+          </label>
+          
+          <button id="library-add" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+              <path d="M513.33-385.33H580v-128h128V-580H580v-128h-66.67v128h-128v66.67h128v128ZM280-213.33q-27 0-46.83-19.84Q213.33-253 213.33-280v-533.33q0-27 19.84-46.84Q253-880 280-880h533.33q27 0 46.84 19.83Q880-840.33 880-813.33V-280q0 27-19.83 46.83-19.84 19.84-46.84 19.84H280Zm0-66.67h533.33v-533.33H280V-280ZM146.67-80q-27 0-46.84-19.83Q80-119.67 80-146.67v-600h66.67v600h600V-80h-600ZM280-813.33V-280v-533.33Z"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </dialog>
   </div>
 </body>
 </html>

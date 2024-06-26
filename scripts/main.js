@@ -2,14 +2,17 @@ import Book from "./controllers/Book.js";
 import Library from "./controllers/Library.js";
 import LibraryDisplay from "./ui-components/LibraryDisplay.js";
 import Card from "./ui-components/Card.js";
+import DialogPresenter from "./ui-components/DialogPresenter.js";
+import CustomCheckbox from "./ui-components/CustomCheckbox.js";
+import FormHandler from "./controllers/FormHandler.js";
 
 document.addEventListener('DOMContentLoaded', () => {
   const myLibrary = new Library;
-
+  
   /*
     Need to initialize listeners here for out-of-scope reasons
     Cards re-render every action, so i need to make use of the
-    library instance
+    library instance in some card methods
   */
   Card.prototype.addButtonListeners = function () {
     this.deleteButton.addListener('click', () => {
@@ -20,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     [this.completedButton, this.pendingButton].forEach(button => {
       button.addListener('click', () => {
         const targetBook = myLibrary.get(this.htmlElement.dataset.index);
-        console.log(targetBook);
         targetBook.toggleReadState();
         myMain.render(myLibrary.sort());
       })
@@ -29,41 +31,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Default books
 
-  const book1 = new Book(
-    'Phenomenlogie des Geistes',
-    'G.W.F. Hegel',
-    '1812',
-    'Philosophy',
-    '567',
-    false
-  );
+  const book1 = new Book({
+    title: 'Phänomenologie des Geistes',
+    author: 'G.W.F. Hegel',
+    publishYear: 1807,
+    genre: 'Philosophy',
+    numPages: '589',
+    isRead: false
+  });
 
-  const book2 = new Book(
-    'Kritik der Reinen Vernunft',
-    'Inmanuel Kant',
-    '1789',
-    'Philosophy',
-    '786',
-    true
-  );
+  const book2 = new Book({
+    title: 'Kritik der Reinen Vernunft',
+    author: 'Inmanuel Kant',
+    publishYear: 1781,
+    genre: 'Philosophy',
+    numPages: '796',
+    isRead: true
+  });
 
-  const book3 = new Book(
-    'El Crepúsculo de los Ídolos',
-    'Friedrich Nietzsche',
-    '1887',
-    'Philosophy',
-    '345',
-    false
-  );
+  const book3 = new Book({
+    title: 'Der Antichrist',
+    author: 'Friedrich Nieztsche',
+    publishYear: 1895,
+    genre: 'Philosophy',
+    numPages: '47',
+    isRead: true
+  });
 
   [book1, book2, book3].forEach(book => {
     myLibrary.add(book);
   });
 
-  // Need to define this functions here, for the same out-of-scope reason
-
   const myMain = new LibraryDisplay('main');
-
   myMain.render(myLibrary.sort());
+
+  const addButton = document.querySelector('#library-add');
+  const dialogPresenter = new DialogPresenter('dialog');
+
+  addButton.addEventListener('click', () => {
+    dialogPresenter.show();
+  });
+
+  
+  const dynamicLabel = new CustomCheckbox('label[for=isRead]');
+
+  const formHandler = new FormHandler('form');
+
+  formHandler.addListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    const data = {};
+    formData.entries().forEach(([field, value]) => {
+      data[field] = value.trim() || '-';
+    });
+
+    this.reset();
+    dialogPresenter.hide();
+
+    if (! data['isRead']) data['isRead'] = false;
+    const book = new Book(data);
+    myLibrary.add(book);
+    myMain.render(myLibrary.sort());
+  });
 });
 

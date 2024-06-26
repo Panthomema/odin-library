@@ -1,4 +1,4 @@
-function Book(title, author, publishYear, genre, numPages, isRead) {
+function Book({ title, author, publishYear, genre, numPages, isRead }) {
   this.title = title;
   this.author = author;
   this.publishYear = publishYear;
