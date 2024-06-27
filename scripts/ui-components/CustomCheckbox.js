@@ -1,12 +1,15 @@
 import Button from "./Button.js";
 import { SVG_COMPLETED_PATH_D } from "../svgData.js";
+import { addTooltip } from "../functions.js";
 
 function CustomCheckbox(selector) {
   this.htmlElement = document.querySelector(selector);
   this.buttons = [
     this.htmlElement.querySelector('.book-pending'),
-    new Button('book-completed', SVG_COMPLETED_PATH_D).htmlElement
+    new Button('book-completed', SVG_COMPLETED_PATH_D, 'notRead.').htmlElement
   ];
+
+  addTooltip(this.buttons[0], 'read.');
 
   this.addIconToggle();
 }

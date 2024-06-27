@@ -3,6 +3,7 @@ import {
   SVG_COMPLETED_PATH_D, SVG_DELETE_PATH_D, SVG_PENDING_PATH_D 
 } from "../svgData.js";
 
+
 function Card(book) {
   this.htmlElement = document.createElement('div');
   this.htmlElement.classList.add('book-card');
@@ -18,9 +19,11 @@ function Card(book) {
     this.htmlElement.appendChild(line);
   });
 
-  this.deleteButton = new Button('book-delete', SVG_DELETE_PATH_D);
-  this.pendingButton = new Button('book-pending', SVG_PENDING_PATH_D);
-  this.completedButton = new Button('book-completed', SVG_COMPLETED_PATH_D);
+  this.deleteButton = new Button('library-danger', SVG_DELETE_PATH_D, 'delete.');
+  this.pendingButton = new Button('book-pending', SVG_PENDING_PATH_D, 'read.');
+  this.completedButton = new Button(
+    'book-completed', SVG_COMPLETED_PATH_D, 'notRead.'
+  );
 
   const controlArea = document.createElement('div');
   controlArea.classList.add('card-control');

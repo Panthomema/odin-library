@@ -1,9 +1,10 @@
 function Book({ title, author, publishYear, genre, numPages, isRead }) {
-  this.title = title;
-  this.author = author;
-  this.publishYear = publishYear;
-  this.genre = genre;
-  this.numPages = numPages;
+  this.unknown = 'N/D';
+  this.title = title || this.unknown;
+  this.author = author || this.unknown;
+  this.publishYear = publishYear || this.unknown;
+  this.genre = genre || this.unknown;
+  this.numPages = numPages || this.unknown;
   this.isRead = isRead ?? false;
 }
 

@@ -5,6 +5,7 @@ import Card from "./ui-components/Card.js";
 import DialogPresenter from "./ui-components/DialogPresenter.js";
 import CustomCheckbox from "./ui-components/CustomCheckbox.js";
 import FormHandler from "./controllers/FormHandler.js";
+import { addTooltip } from "./functions.js";
 
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize library first (stores temporally & via localStorage API)
@@ -34,8 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const dialogPresenter = new DialogPresenter('dialog');
 
   // Listeners for opening dialog
-  const addButtons = document.querySelectorAll('.dialog-open');
-  addButtons.forEach(button => {
+  const dialogTriggers = document.querySelectorAll('.dialog-open');
+  dialogTriggers.forEach(button => {
     button.addEventListener('click', () => {
       dialogPresenter.show();
     });
@@ -54,12 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const formData = new FormData(this);
     const data = {};
     formData.entries().forEach(([field, value]) => {
-      data[field] = value.trim() || '-';
+      data[field] = value.trim();
     });
 
     this.reset();
     dialogPresenter.hide();
-    
+
     const book = new Book(data);
     myLibrary.add(book);
     myMain.render(myLibrary.books);
@@ -69,6 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
   saveButton.addEventListener('click', () => {
     myLibrary.save();
     myMain.render(myLibrary.sort());
+  });
+
+  // Adding tooltips
+
+  addTooltip(saveButton, 'save.');
+
+  document.querySelectorAll('.library-add').forEach(button => {
+    addTooltip(button, 'add.');
   });
 });
 

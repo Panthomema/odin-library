@@ -201,11 +201,11 @@ main {
   height: 1.5em;
 }
 
-.book-delete svg {
+.library-danger svg {
   fill: var(--color-danger);
 }
 
-.book-delete:hover svg {
+.library-danger:hover svg {
   fill: var(--color-danger-hover);
 }
 
@@ -287,6 +287,48 @@ input[type=checkbox] {
 
 form .card-control svg {
   height: 2em;
+}
+
+form .card-control {
+  grid-template-columns: 1fr;
+}
+
+form .library-danger {
+  justify-self: start;
+  visibility: hidden;
+}
+
+/* Tooltips */
+
+.tooltip-container {
+  position: relative;
+}
+
+.tooltip-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.35em 1em;
+  border-radius: 0.3em;
+  color: var(--color-light);
+
+  display: grid;
+  place-items: center;
+
+  visibility: hidden;
+  position: absolute;
+  height: fit-content;
+  
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.4s ease-out; 
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  top: 105%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @media only screen and (max-width: 425px) {

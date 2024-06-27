@@ -1,4 +1,6 @@
-function Button(className, pathData) {
+import { addTooltip } from "../functions.js";
+
+function Button(className, pathData, tooltipText) {
   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
   path.setAttribute('d', pathData);
 
@@ -10,6 +12,8 @@ function Button(className, pathData) {
   this.htmlElement = document.createElement('button');
   this.htmlElement.classList.add(className);
   this.htmlElement.appendChild(svg);
+
+  addTooltip(this.htmlElement, tooltipText);
 }
 
 Button.prototype.addListener = function (event, callback) {
