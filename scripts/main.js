@@ -58,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
       data[field] = value.trim();
     });
 
+    console.log(data)
+
     this.reset();
     dialogPresenter.hide();
 

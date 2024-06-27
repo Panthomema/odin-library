@@ -19,6 +19,6 @@ FormHandler.prototype.addListener = function (event, callback) {
   this.htmlElement.addEventListener(event, callback);
 }
 
-FormHandler.prototype.validate()
+//FormHandler.prototype.validate
 
 export default FormHandler;

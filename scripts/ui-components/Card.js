@@ -11,9 +11,10 @@ function Card(book) {
   const content = Array.from({ length: 4 }, () => document.createElement('p'));
   content[0].textContent = book.title;
   content[0].classList.add('book-title');
-  content[1].textContent = `${book.author}, ${book.publishYear}`;
-  content[2].textContent = book.genre;
-  content[3].textContent = `${book.numPages} pages`;
+  content[1].textContent = `${book.author || 'Unknown author'}` + 
+    `${(book.publishYear) ? ', ' + book.publishYear : ''}`;
+  content[2].textContent = book.category || 'Uncathegorized';
+  content[3].textContent = `${book.numPages || 'N/D'} pages`;
 
   content.forEach(line => {
     this.htmlElement.appendChild(line);
