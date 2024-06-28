@@ -52,13 +52,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   formHandler.addListener('submit', function(event) {
     event.preventDefault();
-    const formData = new FormData(this);
-    const data = {};
-    formData.entries().forEach(([field, value]) => {
-      data[field] = value.trim();
-    });
 
-    console.log(data)
+    if (! formHandler.validate()) {
+      return;
+    }
+
+    const formData = new FormData(this);
+
+    const data = formData.entries().reduce((data, [field, value]) => {
+      data[field] = value.trim();
+      return data;
+    }, {});
 
     this.reset();
     dialogPresenter.hide();

@@ -1,13 +1,8 @@
 import { addTooltip } from "../functions.js";
+import SVG from "./SVG.js";
 
 function Button(className, pathData, tooltipText) {
-  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  path.setAttribute('d', pathData);
-
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg'); // Optional
-  svg.setAttribute('viewBox', '0 -960 960 960');
-  svg.appendChild(path);
+  const svg = new SVG(pathData).node;
 
   this.htmlElement = document.createElement('button');
   this.htmlElement.classList.add(className);

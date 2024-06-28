@@ -1,3 +1,5 @@
+import InputValidator from "./InputValidator.js";
+
 function FormHandler(selector) {
   this.htmlElement = document.querySelector(selector);
   this.errorIcon = this.htmlElement.querySelector('.library-danger');
@@ -12,6 +14,15 @@ function FormHandler(selector) {
 
       this.htmlElement.dispatchEvent(submitEvent);
     }  
+  });
+
+  const inputs = this.htmlElement.querySelectorAll('input:not([type=checkbox])');
+  this.validators = [...inputs].map(element => new InputValidator(element));
+}
+
+FormHandler.prototype.validate = function () {
+  this.validators.forEach(inputValidator => {
+    inputValidator.validate();
   });
 }
 
