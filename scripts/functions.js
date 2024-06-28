@@ -1,7 +1,3 @@
-function containsObject(arr, target) {
-  return arr.find(obj => JSON.stringify(obj) === JSON.stringify(target)) !== undefined;
-}
-
 function addTooltip(elem, text) {
   elem.classList.add('tooltip-container');
 
@@ -14,9 +10,15 @@ function addTooltip(elem, text) {
   icon.addEventListener('transitionend', () => {
     const color = window.getComputedStyle(icon).fill;
     label.style.backgroundColor = color;
-  });
+  }, { once: true });
 
   elem.appendChild(label);
 }
 
-export { containsObject, addTooltip };
+function removeTooltip(elem) {
+  elem.classList.remove('tooltip-container');
+  const tooltip = elem.querySelector('.tooltip-text');
+  if (tooltip) elem.removeChild(tooltip);
+}
+
+export { addTooltip, removeTooltip };

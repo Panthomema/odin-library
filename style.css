@@ -236,6 +236,7 @@ dialog {
   border-radius: 0.4em;
   box-shadow: var(--shadow);
   transition: opacity 0.8s ease;
+  overflow: hidden;
 }
 
 .invisible {
@@ -257,9 +258,27 @@ form {
   gap: 1em;
 }
 
+label {
+  position: relative;
+}
+
+/* Remove controls  */
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+  -ms-appearance: textfield;
+}
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 input:not([type=checkbox]) {
   border: none;
-  padding: 0.35em;
+  padding: 0.35em 15% 0.35em 0.35em;
   background-color: var(--color-light);
   border-radius: 0.2em;
   width: 15em;
@@ -271,7 +290,6 @@ input::placeholder {
 }
 
 label[for=isRead] {
-  position: relative;
   width: 2em;
   display: grid;
   place-items: center;
@@ -293,9 +311,39 @@ form .card-control {
   grid-template-columns: 1fr;
 }
 
+/* Validation */
+
+input.invalid {
+  color: var(--color-danger-hover);
+}
+
+input.invalid::placeholder {
+  color: var(--color-danger);
+}
+
+input.invalid,
+input.invalid::placeholder {
+  transition: color 0.15s ease;
+}
+
 form .library-danger {
-  justify-self: start;
   visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+
+label .library-danger {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5%;
+}
+
+label .library-danger svg {
+  height: 1em;
+}
+
+.card-control .library-danger {
+  justify-self: start;
 }
 
 /* Tooltips */
@@ -317,6 +365,7 @@ form .library-danger {
   visibility: hidden;
   position: absolute;
   height: fit-content;
+  width: max-content;
   
   z-index: 4;
   opacity: 0;

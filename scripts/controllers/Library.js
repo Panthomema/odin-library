@@ -6,6 +6,11 @@ Library.prototype.get = function (index) {
   return this.books[index];
 }
 
+Library.prototype.has = function (book) {
+  return this.books
+    .find(own => JSON.stringify(own) === JSON.stringify(book)) !== undefined;
+}
+
 Library.prototype.add = function (book) {
   this.books.push(book);
 }

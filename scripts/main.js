@@ -51,23 +51,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const formHandler = new FormHandler('form');
 
   formHandler.addListener('submit', function(event) {
+    // 'this' here refers to the element that triggers the submit event (form)
+
     event.preventDefault();
 
     if (! formHandler.validate()) {
       return;
     }
 
-    const formData = new FormData(this);
+    // Handle the data after validation (format -> create new Book)
 
+    const formData = new FormData(this);
     const data = formData.entries().reduce((data, [field, value]) => {
       data[field] = value.trim();
       return data;
     }, {});
+    const book = new Book(data);
+
+    // Handle UI and add the book
 
     this.reset();
     dialogPresenter.hide();
 
-    const book = new Book(data);
     myLibrary.add(book);
     myMain.render(myLibrary.books);
   });

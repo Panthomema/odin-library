@@ -20,16 +20,17 @@ function FormHandler(selector) {
   this.validators = [...inputs].map(element => new InputValidator(element));
 }
 
-FormHandler.prototype.validate = function () {
-  this.validators.forEach(inputValidator => {
-    inputValidator.validate();
-  });
-}
-
 FormHandler.prototype.addListener = function (event, callback) {
   this.htmlElement.addEventListener(event, callback);
 }
 
-//FormHandler.prototype.validate
+FormHandler.prototype.validate = function () {
+  let validity = true;
+  this.validators.forEach(inputValidator => {
+    validity = inputValidator.validate();
+  });
+
+  return validity;
+}
 
 export default FormHandler;
