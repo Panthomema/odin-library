@@ -65,7 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
     */
     const handleData = () => {
       const formData = new FormData(this);
-      const data = formData.entries().reduce((data, [field, value]) => {
+      console.log(formData.entries());
+      const data = [...formData.entries()].reduce((data, [field, value]) => {
         data[field] = value.trim();
         return data;
       }, {});
