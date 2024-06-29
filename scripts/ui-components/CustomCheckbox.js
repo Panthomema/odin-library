@@ -2,6 +2,7 @@ import Button from "./Button.js";
 import { SVG_COMPLETED_PATH_D } from "../svgData.js";
 import { addTooltip } from "../functions.js";
 
+// Binds 2 buttons to replace one for each on click
 function CustomCheckbox(selector) {
   this.htmlElement = document.querySelector(selector);
   this.buttons = [
@@ -14,6 +15,7 @@ function CustomCheckbox(selector) {
   this.addIconToggle();
 }
 
+// Adds click event to the buttons so they perform the replacement
 CustomCheckbox.prototype.addIconToggle = function () {
   this.buttons.forEach((button, _, allButtons) => {
     button.addEventListener('click', () => {

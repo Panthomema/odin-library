@@ -1,6 +1,7 @@
 import Book from "./Book.js";
 
 function Library() {
+  // Get the data on construction
   const storedData = JSON.parse(localStorage.getItem('books')) ?? [];
   this.books = storedData.map(data => new Book(data));
 }

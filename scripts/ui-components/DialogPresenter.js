@@ -1,7 +1,7 @@
 function DialogPresenter (selector) {
   this.htmlElement = document.querySelector(selector);
-  this.formElement = this.htmlElement.querySelector('form');
 
+  // Detects if the event is outside/inside of the dialog, in order to close it
   this.clickOutsideHandler = event => {
     event.stopPropagation();
 
@@ -18,6 +18,7 @@ function DialogPresenter (selector) {
   }
 }
 
+// Shows the modal with transition (prevents getting fired by bubbling events)
 DialogPresenter.prototype.show = function() {
   const handler = event => {
     if (event.target === this.htmlElement) {
@@ -31,6 +32,7 @@ DialogPresenter.prototype.show = function() {
   this.htmlElement.classList.remove('invisible');   
 }
 
+// Hides the modal with transition (prevents getting fired by bubbling events)
 DialogPresenter.prototype.hide = function () {
   const handler = event => {
     if (event.target === this.htmlElement) {

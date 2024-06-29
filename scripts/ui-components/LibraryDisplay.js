@@ -5,6 +5,7 @@ function LibraryDisplay (selector) {
   this.defaultContent = document.querySelector('#default-content');
 }
 
+// Renders books -> cards, set index related to its library array index
 LibraryDisplay.prototype.render = function (books) { 
   const cards = books
     .map((book, index) => new Card(book).setDataIndex(index).htmlElement);
@@ -14,8 +15,8 @@ LibraryDisplay.prototype.render = function (books) {
     return;
   }
 
+  // Append the default content (add button) if no cards
   this.htmlElement.replaceChildren(this.defaultContent);
 }
-
 
 export default LibraryDisplay;

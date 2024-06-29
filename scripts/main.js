@@ -45,37 +45,56 @@ document.addEventListener('DOMContentLoaded', () => {
   // Custom checkbox for read-state in the form dialog
   new CustomCheckbox('label[for=isRead]');
 
+  // First library rendering (sorted - first & after save)
   const myMain = new LibraryDisplay('main');
   myMain.render(myLibrary.sort());
-
+  
   const formHandler = new FormHandler('form');
 
   formHandler.addListener('submit', function(event) {
     // 'this' here refers to the element that triggers the submit event (form)
-
     event.preventDefault();
 
     if (! formHandler.validate()) {
       return;
     }
 
-    // Handle the data after validation (format -> create new Book)
+    /*
+      After validating every input, create a book with the data and check 
+      if the book is already in the library
+    */
+    const handleData = () => {
+      const formData = new FormData(this);
+      const data = formData.entries().reduce((data, [field, value]) => {
+        data[field] = value.trim();
+        return data;
+      }, {});
+      return new Book(data);
+    }
 
-    const formData = new FormData(this);
-    const data = formData.entries().reduce((data, [field, value]) => {
-      data[field] = value.trim();
-      return data;
-    }, {});
-    const book = new Book(data);
-
-    if (myLibrary.has(book)) {
+    const checkDuplication = () => myLibrary.has(handleData());
+    const book = handleData();
+    
+    /* 
+      If it is already in, add listeners to every input in the form that
+      check if the changes represent a fresh book, in order to remove the
+      error icon
+    */
+    if (checkDuplication()) {
       formHandler.showRepeatedError();
+
+      // Using a named function is necessary to be able to remove the listener
+      const handleBlur = function() {
+        if (! checkDuplication()) {
+          formHandler.removeValidatorsListener('blur', handleBlur);
+          formHandler.hideRepeatedError();
+        }
+      }
+      formHandler.addValidatorsListener('blur', handleBlur);
       return;
     }
 
     // Handle UI and add the book
-
-    formHandler.hideRepeatedError();
     this.reset();
     dialogPresenter.hide();
 
@@ -89,8 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     myMain.render(myLibrary.sort());
   });
 
-  // Adding tooltips
-
+  // Adding tooltips to static elements
   addTooltip(saveButton, 'save.');
 
   document.querySelectorAll('.library-add').forEach(button => {

@@ -8,6 +8,7 @@ function Card(book) {
   this.htmlElement = document.createElement('div');
   this.htmlElement.classList.add('book-card');
 
+  // Render content
   const content = Array.from({ length: 4 }, () => document.createElement('p'));
   content[0].textContent = book.title;
   content[0].classList.add('book-title');
@@ -20,6 +21,7 @@ function Card(book) {
     this.htmlElement.appendChild(line);
   });
 
+  // Create buttns
   this.deleteButton = new Button('library-danger', SVG_DELETE_PATH_D, 'delete.');
   this.pendingButton = new Button('book-pending', SVG_PENDING_PATH_D, 'read.');
   this.completedButton = new Button(
@@ -35,6 +37,7 @@ function Card(book) {
   );
   controlArea.appendChild(this.deleteButton.htmlElement);
 
+  // Add listeners on creation (method defined on main)
   this.addButtonListeners();
 
   this.htmlElement.appendChild(controlArea);
@@ -43,10 +46,6 @@ function Card(book) {
 Card.prototype.setDataIndex = function (index) {
   this.htmlElement.dataset.index = index;
   return this;
-}
-
-Card.prototype.destroy = function () {
-  // destroy object?
 }
 
 export default Card;

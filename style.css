@@ -83,6 +83,8 @@
   --shadow: 0 0 10px #0000002a;
 }
 
+/* General */
+
 h1 {
   font-size: 2.5em;
 }
@@ -122,6 +124,8 @@ body {
   position: relative;
 }
 
+/* Header */
+
 header {
   display: grid;
   grid-auto-flow: column;
@@ -134,6 +138,7 @@ header {
   align-self: start;
   background-color: var(--color-white);
   box-shadow: var(--shadow);
+  z-index: 4;
 }
 
 nav {
@@ -158,6 +163,8 @@ nav {
   fill: var(--color-positive-hover)
 }
 
+/* Main */
+
 main {
   padding: 3rem 5%;
   display: grid;
@@ -175,6 +182,8 @@ main {
   font-size: 1.25rem;
   gap: 1em;
 }
+
+/* Card */
 
 .book-card {
   display: grid;
@@ -225,6 +234,8 @@ main {
   fill: var(--color-completed);
 }
 
+/* Modal */
+
 dialog {
   --transition-duration: 0.5s;
   position: fixed;
@@ -252,6 +263,8 @@ dialog::backdrop {
   background-color: var(--color-overlay);
   transition: background-color var(--transition-duration) ease;
 }
+
+/* Form */
 
 form {
   --transition-duration: 0.2s;
@@ -385,6 +398,10 @@ label .library-danger svg {
 @media only screen and (max-width: 425px) {
   main {
     grid-template-columns: 1fr;
+  }
+
+  input:not([type=checkbox]) {
+    max-width: 70vw;
   }
 }
 

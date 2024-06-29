@@ -7,8 +7,8 @@ function addTooltip(elem, text) {
 
   const icon = elem.querySelector('svg');
 
+  // Get the final color (after the hover transition)
   icon.addEventListener('transitionend', event => {
-    console.log(event);
     const color = window.getComputedStyle(icon).fill;
     label.style.backgroundColor = color;
   }, { once: true });
