@@ -1,8 +1,11 @@
 import InputValidator from "./InputValidator.js";
+import { addTooltip } from "../functions.js";
 
 function FormHandler(selector) {
   this.htmlElement = document.querySelector(selector);
-  this.errorIcon = this.htmlElement.querySelector('.library-danger');
+  this.errorIcon = document.querySelector('form .card-control .library-danger');
+  this.repeatedBookMessage = 'already existing book.';
+  addTooltip(this.errorIcon, this.repeatedBookMessage);
 
   this.htmlElement.addEventListener('keydown', event => {
     if (event.key === 'Enter') {
@@ -25,12 +28,23 @@ FormHandler.prototype.addListener = function (event, callback) {
 }
 
 FormHandler.prototype.validate = function () {
-  let validity = true;
-  this.validators.forEach(inputValidator => {
-    validity = inputValidator.validate();
-  });
-
-  return validity;
+  return this.validators.every(validator => validator.validate());
 }
+
+FormHandler.prototype.showRepeatedError = function () {
+  this.errorIcon.classList.remove('invisible');
+  this.errorIcon.addEventListener('transitionend', () => {
+    this.errorIcon.style.visibility = 'visible';
+  }, { once: true });
+}
+
+FormHandler.prototype.hideRepeatedError = function () {
+  this.errorIcon.classList.add('invisible');
+  this.errorIcon.addEventListener('transitionend', () => {
+    this.errorIcon.style.visibility = 'hidden';
+  }, { once: true });
+}
+
+
 
 export default FormHandler;

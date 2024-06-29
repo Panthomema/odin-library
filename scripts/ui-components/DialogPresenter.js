@@ -1,5 +1,7 @@
 function DialogPresenter (selector) {
   this.htmlElement = document.querySelector(selector);
+  this.formElement = this.htmlElement.querySelector('form');
+
   this.clickOutsideHandler = event => {
     event.stopPropagation();
 
@@ -17,23 +19,30 @@ function DialogPresenter (selector) {
 }
 
 DialogPresenter.prototype.show = function() {
-  this.htmlElement.showModal();
-
-  requestAnimationFrame(() => {
-    this.htmlElement.classList.remove('invisible');
-    this.htmlElement.addEventListener('transitionend', () => {
+  const handler = event => {
+    if (event.target === this.htmlElement) {
       document.addEventListener('click', this.clickOutsideHandler);
-    }, { once: true });
-  });
+      this.htmlElement.removeEventListener('transitionend', handler);
+    }
+  };
+  this.htmlElement.addEventListener('transitionend', handler);
+
+  this.htmlElement.showModal();
+  this.htmlElement.classList.remove('invisible');   
 }
 
 DialogPresenter.prototype.hide = function () {
-  document.removeEventListener('click', this.clickOutsideHandler);
+  const handler = event => {
+    if (event.target === this.htmlElement) {
+      event.currentTarget.close();
+      this.htmlElement.removeEventListener('transitionend', handler);
+    }
+  }
 
+  this.htmlElement.addEventListener('transitionend', handler);
+
+  document.removeEventListener('click', this.clickOutsideHandler);
   this.htmlElement.classList.add('invisible');
-  this.htmlElement.addEventListener('transitionend', event => {
-    event.currentTarget.close();
-  }, { once: true });
 }
 
 export default DialogPresenter;

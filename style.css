@@ -226,6 +226,7 @@ main {
 }
 
 dialog {
+  --transition-duration: 0.5s;
   position: fixed;
   inset: 50%;
   transform: translate(-50%, -50%);
@@ -235,8 +236,8 @@ dialog {
   padding: 2em;
   border-radius: 0.4em;
   box-shadow: var(--shadow);
-  transition: opacity 0.8s ease;
-  overflow: hidden;
+  transition: opacity var(--transition-duration) ease;
+  overflow: visible;
 }
 
 .invisible {
@@ -249,10 +250,11 @@ dialog.invisible::backdrop {
 
 dialog::backdrop {
   background-color: var(--color-overlay);
-  transition: background-color 0.5s ease;
+  transition: background-color var(--transition-duration) ease;
 }
 
 form {
+  --transition-duration: 0.2s;
   display: grid;
   justify-content: center;
   gap: 1em;
@@ -323,12 +325,12 @@ input.invalid::placeholder {
 
 input.invalid,
 input.invalid::placeholder {
-  transition: color 0.15s ease;
+  transition: color var(--transition-duration) ease;
 }
 
 form .library-danger {
   visibility: hidden;
-  transition: opacity 0.2s ease;
+  transition: opacity var(--transition-duration) ease;
 }
 
 label .library-danger {

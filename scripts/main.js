@@ -68,8 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }, {});
     const book = new Book(data);
 
+    if (myLibrary.has(book)) {
+      formHandler.showRepeatedError();
+      return;
+    }
+
     // Handle UI and add the book
 
+    formHandler.hideRepeatedError();
     this.reset();
     dialogPresenter.hide();
 

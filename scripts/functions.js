@@ -7,7 +7,8 @@ function addTooltip(elem, text) {
 
   const icon = elem.querySelector('svg');
 
-  icon.addEventListener('transitionend', () => {
+  icon.addEventListener('transitionend', event => {
+    console.log(event);
     const color = window.getComputedStyle(icon).fill;
     label.style.backgroundColor = color;
   }, { once: true });

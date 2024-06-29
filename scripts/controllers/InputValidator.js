@@ -40,11 +40,9 @@ InputValidator.prototype.showError = function () {
       this.htmlElement.classList.add(this.invalidClass);
       removeTooltip(this.errorIcon); // if there is one from a previous error
       addTooltip(this.errorIcon, message);
-
+      
+      this.errorIcon.style.visibility = 'visible';
       this.errorIcon.classList.remove('invisible');
-      this.errorIcon.addEventListener('transitionend', () => {
-        this.errorIcon.style.visibility = 'visible';
-      }, { once: true });
       break;
     }
   } 
@@ -55,9 +53,8 @@ InputValidator.prototype.removeError = function() {
   removeTooltip(this.errorIcon);
 
   this.errorIcon.classList.add('invisible');
-  this.errorIcon.addEventListener('transitionend', () => {
+  this.errorIcon.addEventListener('transitionend', event => {
     this.errorIcon.style.visibility = 'hidden';
-    
   }, { once: true });
 }
 
