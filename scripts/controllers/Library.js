@@ -3,8 +3,8 @@ import Book from "./Book.js";
 class Library {
   constructor() {
     // Get the data on construction
-    const storedData = JSON.parse(localStorage.getItem('books')) ?? [];
-    this.books = storedData.map(data => new Book(data));
+    const storedData = JSON.parse(localStorage.getItem("books")) ?? [];
+    this.books = storedData.map((data) => new Book(data));
   }
 
   get(index) {
@@ -12,8 +12,10 @@ class Library {
   }
 
   has(book) {
-    return this.books
-      .find(own => JSON.stringify(own) === JSON.stringify(book)) !== undefined;
+    return (
+      this.books.find((own) => JSON.stringify(own) === JSON.stringify(book)) !==
+      undefined
+    );
   }
 
   add(book) {
@@ -27,20 +29,13 @@ class Library {
   sort() {
     return this.books.sort((a, b) => {
       if (a.isRead === b.isRead) return 0;
-      return (a.isRead) ? 1 : -1;
+      return a.isRead ? 1 : -1;
     });
   }
-  
+
   save() {
-    localStorage.setItem('books', JSON.stringify(this.books));
+    localStorage.setItem("books", JSON.stringify(this.books));
   }
 }
 
-
-
-
-
-
-
 export default Library;
- 

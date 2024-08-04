@@ -58,7 +58,7 @@ class Card {
 
     this.htmlElement.appendChild(controlArea);
   }
-  
+
   setDataIndex(index) {
     this.htmlElement.dataset.index = index;
     return this;

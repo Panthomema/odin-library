@@ -56,7 +56,7 @@ class InputValidator {
       }
     }
   }
-  
+
   removeError() {
     this.htmlElement.classList.remove(this.invalidClass);
     removeTooltip(this.errorIcon);
